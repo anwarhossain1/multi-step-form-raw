@@ -1,6 +1,7 @@
 
 
 .stepper-wrapper-vertical {
+
     .step-wrapper {
         display: flex;
         align-items: center;
@@ -54,3 +55,61 @@
     background:rgb(241, 84, 84);
     color:#fff;
 }
+
+.tree__nested-items {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .tree__item {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    border: 2px solid #e96b6b;
+    background-color: #f7f8fa;
+    border-radius: 7px;
+    padding: 10px 25px;
+    margin: 10px;
+  }
+  
+  .tree__item--nested {
+    position: relative;
+  }
+  
+  /* line */
+  .tree__item--nested:before {
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    /* padding of container - 10px */
+    left: -60px;
+    /* padding of container - 10px */
+    width: 60px;
+    /* 3 * half height + half of border radius */
+    height: calc(150% + 7.5px);
+    border-bottom: inherit;
+    border-left: inherit;
+    border-bottom-left-radius: 15px;
+    /* don't overlap items */
+    z-index: -1;
+    
+  }
+  
+  /* arrow */
+  .tree__item--nested:after {
+    content: "";
+    position: absolute;
+    /* border-width - 1px */
+    left: -8px;
+    bottom: calc(50% - 6px);
+    border-color: transparent;
+    border-left-color: inherit;
+    border-style: inherit;
+    border-width: 7px;
+    
+  }

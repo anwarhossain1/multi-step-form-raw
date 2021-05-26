@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {useState} from 'react';
 import "./Stepper.scss";
 export default class Stepper extends Component {
   constructor() {
@@ -9,15 +10,10 @@ export default class Stepper extends Component {
         subSteps:[]
     };
   }
-//   const stepsArray = [
-//     ,
-//     "Step 2",
-//     "Step 3",
-//     "Step 4"
-// ];
+
 
 componentDidMount(){
-  const {steps, currentStep, subSteps} = this.props;
+  const {steps, currentStep, subSteps, sub1} = this.props;
   
   const stepsState = steps.map((step, index) => {
     const stepObj = {};
@@ -66,6 +62,7 @@ updateStep(stepNumber, steps){
         selected:true,
         completed:false
       };
+      
       stepCounter++;
     }
 
@@ -100,14 +97,14 @@ updateStep(stepNumber, steps){
 
 
   render() {
+   
     
      //const {steps} = this.props;
+     const {sub1, sub2} = this.props;
      const {steps} = this.state;
      const subSteps = [
       "District Profile",
-        "Personal Details",
-        "Add Career Pathway",
-        "Step 4"
+        "Personal Details"
   
   
     ];
@@ -115,19 +112,54 @@ updateStep(stepNumber, steps){
 
       const stepsDisplay = steps.map((step, index)=>{
           if(this.props.currentStep > 0){
-            return (
-              <div className="step-wrapper">
-              <div className={`step-number ${step.selected ? "step-number-active" : "step-number-disabled" } `}>{ step.completed? <span>&#10003;</span> :index+1}</div>
-              <div className={`step-description ${step.highlighted ? "step-description-active" : "step-description-disabled" } `}>{step.description} <div className='step-subDes'>{subSteps[index]} </div> </div>
-              <div className={index !== steps.length -1 ? "divider-line":""}></div>
-              </div>
-            )
+            // if(this.props.currentStep >= 2 && index == 1){
+            //   // return(
+            //   //   <>
+            //   //   <div className="step-wrapper">
+            //   //   <div className={`step-number ${step.selected ? "step-number-active" : "step-number-disabled" } `}>{ step.completed? <span>&#10003;</span> :index+1}</div>
+            //   //   <div className={`step-description ${step.highlighted ? "step-description-active" : "step-description-disabled" } `}>{step.description} <div className='step-subDes'>{subSteps[index]} </div> </div>
+            //   //   <div className={index !== steps.length -1 ? "divider-line":""}></div>
+            //   //   </div>
+            //   //  {sub1==false ?  <div>hilo</div> : null}
+            //   //  {sub2==false &&  <div>hi</div>}
+            //   //   </>
+                
+            //   // )
+              
+
+            // }
+            // else{
+              return (
+                <>
+                <div className="step-wrapper">
+                <div className={`step-number ${step.selected ? "step-number-active" : "step-number-disabled" } `}>{ step.completed? <span>&#10003;</span> :index+1}</div>
+                <div className={`step-description ${step.highlighted ? "step-description-active" : "step-description-disabled" } `}>{step.description} <div className='step-subDes'>{subSteps[index]} </div> </div>
+                <div className={index !== steps.length -1 ? "divider-line":""}></div>
+                </div>
+                
+                </>
+              )
+            // }
+           
           }
+         
       })
 
     return (
       <div className="stepper-wrapper-vertical">
        {stepsDisplay}
+       <div className="tree__ite">
+         <ul className="tree__nested-items">
+         {this.props.currentStep>=2 &&  <li className="tree__item tree__item--nested">Career Pathway</li>}
+      {this.props.currentStep>=3 &&  <li className="tree__item tree__item--nested">Dream job</li>}
+      {this.props.currentStep>=4 &&  <li className="tree__item tree__item--nested">Interest</li>}
+      {this.props.currentStep>=5 &&  <li className="tree__item tree__item--nested">After Graduation</li>}
+      {this.props.currentStep==6 &&  <li className="tree__item tree__item--nested">Certifications</li>}
+
+         </ul>
+      
+       </div>
+       
       </div>
     );
   }
